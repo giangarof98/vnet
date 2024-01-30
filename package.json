@@ -1,0 +1,20 @@
+{
+  "name": "vnet",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "vnet",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon back/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1",
+    "nodemon": "^3.0.3"
+  }
+}
