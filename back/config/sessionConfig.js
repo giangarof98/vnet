@@ -1,32 +1,16 @@
-import dotenv from 'dotenv';
-dotenv.config();
-const secret = process.env.SECRET;
-const DB_URI = process.env.DB_URI;
+import jwt from 'jsonwebtoken'
 
-import MongoStore from "connect-mongo";
+export const generateToken = (res, userId) => {
+    const token = jwt.sign({userId}, process.env.JWT_SECRET, {
+        expiresIn: '30d'
+    });
 
-const store = MongoStore.create({
-    mongoUrl: DB_URI,
-    secret,
-    touchAfter: 24 * 60 * 60
-})
-
-store.on('error', function(e) {
-    console.log('error found', e)
-})
-
-const sessionConfig = {
-    store,
-    name:'session',
-    secret,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
+    // setjwt as http only cookie
+    res.cookie('jwt', token, {
         httpOnly: true,
-        //secure: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7
-    }
-}
+        secure: process.env.NODE_ENV !== 'development',
+        sameSite: "strict",
+        maxAge: 30 * 24 *  60 * 60 * 1000 //30 days
+    });
 
-export default sessionConfig
+}

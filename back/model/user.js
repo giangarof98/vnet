@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 import bcrypt from 'bcrypt'
-import passportLocalMongoose from 'passport-local-mongoose';
 
 const userSchema = new mongoose.Schema({
     isAdmin:{
@@ -26,9 +25,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    image:{
-        type:String
-    }
+    image:[{url:String,filename:String,originalname:String}]
 }, {timestamps:true});
 
 // Validate the password
