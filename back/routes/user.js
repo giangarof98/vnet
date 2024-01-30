@@ -12,13 +12,15 @@ import {
 
 } from '../controller/user.js';
 
+import { protect, admin } from '../config/authMiddleware.js';
+
 
 router.get('/users', getAllUsers)
 router.post('/signup', signupUser)
 router.post('/signin', signinUser)
-router.get('/logout', logoutUser)
-router.get('/:id', profileUser)
-router.put('/update/:id', multerProfile, updateUser)
-router.delete('/delete/:id', deleteUser)
+router.get('/logout',  logoutUser)
+router.get('/:id', protect, profileUser)
+router.put('/update/:id', protect, multerProfile, updateUser)
+router.delete('/delete/:id', protect, admin, deleteUser)
 
 export default router;
