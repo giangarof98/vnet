@@ -5,12 +5,14 @@ import { generateToken } from "../config/sessionConfig.js";
 // route: /api/user/signup
 // Post
 const signupUser = async(req,res) => {
-    const {name, username, password, email} = req.body;
+    const {name, username, password, email, confirmPassword} = req.body;
     
     try {
         const emailExist = await User.findOne({email})
         const usernameExist = await User.findOne({username})
-        if(emailExist || usernameExist){
+        if(password !== confirmPassword){
+            return res.status(400).json({message: 'Password doesnt match. Try again.'})
+        }else if(emailExist || usernameExist){
             return res.status(400).send({message: 'Email or username registered already, try a new one.'})
         }
     
