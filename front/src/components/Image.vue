@@ -1,5 +1,5 @@
 <template>
-    <img :src="image" alt="profile" class="w-14 h-14 rounded-full">
+        <img :src="image" alt="profile">
 </template>
 
 <script>
@@ -8,7 +8,7 @@ export default {
     Name: 'Image',
     data(){
         return{
-            image:''
+            image:'',
         }
     },
     mounted() {
@@ -17,10 +17,9 @@ export default {
     methods:{
         async fetchData(){
             const userId = localStorage.getItem('userId')
-            // console.log(userId)
             try {        
                 const res = await axios.get(`/api/user/${userId}`)
-                console.log(res.data)
+                // console.log(res.data)
                 this.image = res.data.image[0].url
                 
             } catch (error) {

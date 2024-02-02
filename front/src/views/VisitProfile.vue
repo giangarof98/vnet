@@ -3,7 +3,6 @@
     <div class="flex flex-row gap-4">
 
         <div>
-            <!-- <Image class="w-80 h-80"/> -->
             <img :src="user.image" alt="profile" class="w-80">
         </div>
         <div>
@@ -24,8 +23,7 @@
 import axios from 'axios'
 import Image from '../components/Image.vue'
 export default {
-    name:'Profile',
-    // components:{Image},
+    name:'VisitProfile',
     data(){
         return{
             user:{
@@ -43,11 +41,10 @@ export default {
     },
     methods:{
         async fetchData(){
-            const userId = localStorage.getItem('userId')
-            console.log(userId)
+            const id = this.$route.params.id
+            console.log(id)
             try {        
-                const res = await axios.get(`/api/user/${userId}`)
-                // console.log(res)
+                const res = await axios.get(`/api/user/${this.$route.params.id}`)
                 
                 this.user.name = res.data.name
                 this.user.username = res.data.username

@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    bio:{
+        type:String,
+    },
     image:[{url:String,filename:String,originalname:String}]
 }, {timestamps:true});
 

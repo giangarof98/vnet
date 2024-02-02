@@ -97,7 +97,15 @@ const deleteUser = async(req,res) => {
 // Update
 const updateUser = async(req,res) => {
     const {id} = req.params;
-    const {name, username, password, confirmPassword, email, image} = req.body;
+    const { 
+        name, 
+        username, 
+        password, 
+        confirmPassword, 
+        email, 
+        image, 
+        bio
+    } = req.body;
     const user = await User.findById(id)
     const emailRegistered = await User.findOne({email})
     const usernameRegistered = await User.findOne({username})
@@ -131,24 +139,25 @@ const updateUser = async(req,res) => {
                 user.username = username;
                 user.password = password;
                 user.email = email;
+                user.bio = bio;
                 // if(user.password !== confirmPassword){
                 //     return res.status(400).json({message: 'Password doesnt match. Try again.'})
                 // } else if(emailRegistered || usernameRegistered){
                 //     return res.status(400).json({message: 'Email or username already registered. Try with another one.'})
                 // } 
-                if(emailRegistered || usernameRegistered){
-                    return res.status(400).json({message: 'Email or username already registered. Try with another one.'})
-                }
+                // if(emailRegistered || usernameRegistered){
+                //     return res.status(400).json({message: 'Email or username already registered. Try with another one.'})
+                // }
                 const updatedUser = await user.save()
                 console.log(updatedUser)
                 return res.status(200).json({updatedUser, message: 'User updated successfuly'})
         
             } else {
-                res.status(404)
-                throw new Error('Resource not found')
+                return res.status(404).json({message: 'Invalid new information, try again.'})
             }
-    } catch (error) {
-        res.status
+        } catch (error) {
+            console.log(error)
+
     }
 
 

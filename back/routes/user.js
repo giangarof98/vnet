@@ -19,7 +19,7 @@ router.get('/users', getAllUsers)
 router.post('/signup', signupUser)
 router.post('/signin', signinUser)
 router.get('/logout',  logoutUser)
-router.get('/:id', protect, profileUser)
+router.get('/:id', profileUser)
 router.put('/update/:id', protect, multerProfile, updateUser)
 router.delete('/delete/:id', protect, admin, deleteUser)
 

@@ -9,7 +9,9 @@
                     </div>
                     <div class="flex gap-4">
                         <button @click="logout" class="text-white">Logout</button>
-                        <Image />
+                        <router-link :to="`/profile/${userId}`">
+                            <Image class="w-14 h-14 rounded-full" />
+                        </router-link>
                     </div>
                 </div>
 
@@ -31,7 +33,7 @@ export default {
     data(){
         return{
             userId: '',
-            image:'',
+            travelId:''
         }
     },
     mounted() {
@@ -39,11 +41,11 @@ export default {
         
     },
     methods:{
-        async fetchData(){
-            const id = this.$route.params.id
-            // const res = await axios.get(`/api/user/${id}`)
-            // this.image = res.data.image[0].url
-        },
+        // async fetchData(){
+        //     const id = this.$route.params.id
+        //     // const res = await axios.get(`/api/user/${id}`)
+        //     // this.image = res.data.image[0].url
+        // },
         ifUser(){
             const user = localStorage.getItem('userId')
             this.userId = user
