@@ -49,9 +49,9 @@ export default {
                     
                 const res = await axios.post('/api/user/signin', credentials)
                 const id = res.data.userProfile._id
-                this.$router.push(`/profile/${id}`)
-                console.log(res.data.userProfile);
                 localStorage.setItem("userId", id)
+                this.$router.push(`/profile/${id}`)
+                // console.log(res.data.userProfile);
                 
             } catch (error) {
                 if(error.response.data.message){

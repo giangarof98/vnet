@@ -1,13 +1,22 @@
 <template>
     <h1>Profile</h1>
-    
-    <p>Name: {{user.name}}</p>
-    <p>Username: {{user.username}}</p>
-    <p>Email: {{user.email}}</p>
+    <div class="flex flex-row gap-4">
 
-    <router-link 
-        class="bg-blue-500 rounded-full p-2"
-        :to="`/profile/updateform/${user.id}`" >Update information</router-link>
+        <div>
+
+            <img :src="user.image" alt="profile" class="w-80">
+        </div>
+        <div>
+
+            <p>Name: {{user.name}}</p>
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <router-link 
+                class="bg-blue-500 rounded-full p-2"
+                :to="`/profile/updateform/${user.id}`" >Update information</router-link>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -21,7 +30,7 @@ export default {
                 name:'',
                 username:'',
                 email:'',
-                img:''
+                image:''
             }
         }
     },
@@ -40,6 +49,7 @@ export default {
                 this.user.username = res.data.username
                 this.user.email = res.data.email
                 this.user.id = res.data._id
+                this.user.image = res.data.image[0].url
                 
             } catch (error) {
                 if(error.response.data.message){

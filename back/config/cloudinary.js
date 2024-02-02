@@ -3,20 +3,19 @@ import { v2 as cloudinary } from 'cloudinary'
 
 
 cloudinary.config({
-    cloud_name: process.env.CLOUD,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
+    cloud_name: 'gggarof',
+    api_key: '757512262653573',
+    api_secret: 'nXv3l6yhPd_pozurhbBbVAJWZ9I'
 });
+// const storage1 = new CloudinaryStorage({
+//     cloudinary,
+//     params: {
+//         folder: 'Vnet',
+//         allowedFormats: ['png', 'jpeg', 'jpg']
+//     }
+// });
 
-const storage1 = new CloudinaryStorage({
-    cloudinary,
-    params: {
-        folder: 'Vnet',
-        allowedFormats: ['png', 'jpeg', 'jpg']
-    }
-});
-
-const storage2 = new CloudinaryStorage({
+const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: 'profileImg',
@@ -24,4 +23,4 @@ const storage2 = new CloudinaryStorage({
     }
 });
 
-export { storage1, storage2, cloudinary}
+export {storage, cloudinary}
