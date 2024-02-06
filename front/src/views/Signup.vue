@@ -84,7 +84,8 @@ export default {
                     }
                     
                 const res = await axios.post('/api/user/signup', credentials)
-                console.log(res);
+                // console.log(res);
+                // this.$router.push(`/signin`)
                 
             } catch (error) {
                 if(error.response.data.message){

@@ -9,7 +9,7 @@ import {
     getAllUsers,
     profileUser,
     updateUser,
-    follow
+    followUser
 
 } from '../controller/user.js';
 
@@ -17,7 +17,7 @@ import { protect, admin } from '../config/authMiddleware.js';
 
 
 router.get('/users', getAllUsers)
-router.post('/follow/:id', protect, follow)
+router.post('/follow/:id', protect, followUser)
 router.post('/signup', signupUser)
 router.post('/signin', signinUser)
 router.get('/logout',  logoutUser)

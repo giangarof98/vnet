@@ -168,7 +168,7 @@ const updateUser = async(req,res) => {
 // Follow user
 // route: /api/user/follow/:id
 // Post
-const follow = async(req,res) => {
+const followUser = async(req,res) => {
     try{
         const user = await User.findById(req.params.id);
         const follower = user.followers.some((f) => {
@@ -197,33 +197,6 @@ const follow = async(req,res) => {
     } catch(err){
         console.log(err)
     }
-
-
-    // const {id} = req.params
-    // try {
-        
-    //     const currentUser = await User.findById(req.user._id)
-    
-    //     const findUser = await User.findById(id)
-        
-    //     if(!findUser){
-    //         return res.status(404).json({message:'This user doent exist.'})
-    //     } 
-    //     // else {
-    //     //     console.log(`find user: ${findUser._id}`)
-    //     //     console.log(`logged user: ${currentUser._id}`)
-    //     //     // findUser.followers.push(currentUser._id)
-    //     //     // await currentUser.save(added);
-            
-    //     //     return res.status(200).json({message:'followwing'})
-    //     // }
-    //     findUser.followers.push(currentUser._id)
-    //     console.log(findUser.followers)
-    //     return res.status(200).json({message:'followwing'})
-    // } catch (error) {
-    //     // console.log(error)
-    //     return res.status(500).json({ message: 'Internal server error' });
-    // }
 }
 
 export {
@@ -234,5 +207,5 @@ export {
     getAllUsers,
     profileUser,
     updateUser,
-    follow
+    followUser
 }
