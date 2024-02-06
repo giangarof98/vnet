@@ -3,7 +3,6 @@
     <div class="flex flex-row gap-4">
 
         <div>
-            <!-- <Image class="w-80 h-80"/> -->
             <img :src="user.image" alt="profile" class="w-80">
         </div>
         <div>
