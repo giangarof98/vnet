@@ -12,7 +12,8 @@
             <p>Username: {{user.username}}</p>
             <p>Email: {{user.email}}</p>
             <p>About: {{user.bio}}</p>
-            <router-link 
+            <p>followers: {{user.followers}}</p>
+            <router-link v-show="loggedUser === user.id"
                 class="bg-blue-500 rounded-full p-2"
                 :to="`/profile/updateform/${user.id}`" >Update information</router-link>
         </div>
@@ -28,13 +29,15 @@ export default {
     // components:{Image},
     data(){
         return{
+            loggedUser:'',
             user:{
                 id:'',
                 name:'',
                 username:'',
                 email:'',
                 image:'',
-                bio:''
+                bio:'',
+                followers:''
             }
         }
     },
@@ -43,8 +46,9 @@ export default {
     },
     methods:{
         async fetchData(){
-            const userId = localStorage.getItem('userId')
-            console.log(userId)
+            this.loggedUser = localStorage.getItem('userId')
+            const userId = this.$route.params.id
+            // console.log(userId)
             try {        
                 const res = await axios.get(`/api/user/${userId}`)
                 // console.log(res)
@@ -55,6 +59,7 @@ export default {
                 this.user.id = res.data._id
                 this.user.image = res.data.image[0].url
                 this.user.bio = res.data.bio
+                this.user.followers = res.data.followers
                 
             } catch (error) {
                 if(error.response.data.message){

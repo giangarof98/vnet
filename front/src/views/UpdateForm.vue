@@ -86,7 +86,9 @@
             </div>
             <button class="rounded-full bg-emerald-300 p-3">Submit Changes</button>
             <button class="rounded-full bg-cyan-600 p-3">
-                <router-link :to="`/profile/${this.$route.params.id}`">Go Back</router-link>
+                <router-link :to="`/profile/${this.$route.params.id}`">
+                    <font-awesome-icon icon="fa-solid fa-arrow-left" />
+                </router-link>
             </button>
 
             <div v-if="message" class="text-red-500">{{ message }}</div>

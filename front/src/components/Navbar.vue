@@ -4,13 +4,15 @@
             <div class="relative flex p-2 gap-6">
                 <div v-if="userId" class="flex flex-row justify-around w-full">
                     <div class="relative flex flex-row p-2 gap-6 text-white">
-                        <button>Home</button>
-                        <button>Create</button>
+                        <button @click="navigateToHome"><font-awesome-icon icon="fa-solid fa-house" /></button>
+                        <button @click="navigateToCreate"><font-awesome-icon icon="fa-solid fa-plus" /></button>
                     </div>
                     <div class="flex gap-4">
-                        <button @click="logout" class="text-white">Logout</button>
+                        <button @click="logout" class="text-white">
+                            <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
+                        </button>
                         <router-link :to="`/profile/${userId}`">
-                            <Image class="w-14 h-14 rounded-full" />
+                            <Image class="w-14 h-14 rounded-full"/>
                         </router-link>
                     </div>
                 </div>
@@ -27,6 +29,7 @@
 <script>
 import axios from 'axios';
 import Image from './Image.vue'
+
 export default {
     name:'Navbar',
     components:{Image},
@@ -38,9 +41,14 @@ export default {
     },
     mounted() {
         this.ifUser();
-        
     },
     methods:{
+        navigateToHome() {
+            this.$router.push('/home');
+        },
+        navigateToCreate() {
+            this.$router.push('/add');
+        },
         // async fetchData(){
         //     const id = this.$route.params.id
         //     // const res = await axios.get(`/api/user/${id}`)

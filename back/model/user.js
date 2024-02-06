@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import bcrypt from 'bcrypt'
+import { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
     isAdmin:{
@@ -28,7 +29,15 @@ const userSchema = new mongoose.Schema({
     bio:{
         type:String,
     },
-    image:[{url:String,filename:String,originalname:String}]
+    image:[{url:String,filename:String,originalname:String}],
+    followers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    following: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 }, {timestamps:true});
 
 // Validate the password

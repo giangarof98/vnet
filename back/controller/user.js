@@ -1,4 +1,5 @@
 import User from "../model/user.js";
+import mongoose from "mongoose";
 import { generateToken } from "../config/sessionConfig.js";
 
 // Signup/Register user
@@ -35,11 +36,12 @@ const signupUser = async(req,res) => {
 // Post
 const signinUser = async(req,res) => {
     const {username, password} = req.body;
+    // console.log(req.body)
     try {
         const user = await User.findOne({username});
         if(user && (await user.matchPassword(password))){
             const token = generateToken(res, user._id)
-            res.status(200).json({userProfile: user, message: 'Welcome back'})
+            res.status(200).json({token, userProfile: user, message: 'Welcome back'})
         } else{
             res.status(400).send({message: 'No user were found with the provided credentials.' });
         }
@@ -130,7 +132,7 @@ const updateUser = async(req,res) => {
             if (img.length > 0) {
                 user.image = img;
             }
-            console.log(img)
+            // console.log(img)
         
             if(user){
         
@@ -163,6 +165,67 @@ const updateUser = async(req,res) => {
 
 }
 
+// Follow user
+// route: /api/user/follow/:id
+// Post
+const follow = async(req,res) => {
+    try{
+        const user = await User.findById(req.params.id);
+        const follower = user.followers.some((f) => {
+            return f.equals(req.user._id)
+        })
+
+        const current = await User.findById(req.user._id)
+        const following = current.following.some((f) => {
+            return f.equals(req.user._id)
+        })
+        
+        if (follower) {
+            user.followers.pull(req.user._id);
+            current.following.pull(user._id);
+            
+        } else {
+            user.followers.push(req.user._id);
+            current.following.push(user._id);
+            
+        }
+
+        await user.save();
+        await current.save();
+        return res.status(200).json({ message: follower ? 'Unfollowed' : 'Following' });
+
+    } catch(err){
+        console.log(err)
+    }
+
+
+    // const {id} = req.params
+    // try {
+        
+    //     const currentUser = await User.findById(req.user._id)
+    
+    //     const findUser = await User.findById(id)
+        
+    //     if(!findUser){
+    //         return res.status(404).json({message:'This user doent exist.'})
+    //     } 
+    //     // else {
+    //     //     console.log(`find user: ${findUser._id}`)
+    //     //     console.log(`logged user: ${currentUser._id}`)
+    //     //     // findUser.followers.push(currentUser._id)
+    //     //     // await currentUser.save(added);
+            
+    //     //     return res.status(200).json({message:'followwing'})
+    //     // }
+    //     findUser.followers.push(currentUser._id)
+    //     console.log(findUser.followers)
+    //     return res.status(200).json({message:'followwing'})
+    // } catch (error) {
+    //     // console.log(error)
+    //     return res.status(500).json({ message: 'Internal server error' });
+    // }
+}
+
 export {
     signupUser, 
     signinUser, 
@@ -170,5 +233,6 @@ export {
     logoutUser,
     getAllUsers,
     profileUser,
-    updateUser
+    updateUser,
+    follow
 }
