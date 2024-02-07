@@ -16,7 +16,6 @@
                 :to="`/profile/updateform/${user.id}`">
             Update information
             </router-link>
-
             <FollowBtn />
         </div>
     </div>
@@ -54,7 +53,6 @@ export default {
             try {        
                 const res = await axios.get(`/api/user/${userId}`)
                 this.user.followers = res.data.followers
-                
                 this.user.name = res.data.name
                 this.user.username = res.data.username
                 this.user.email = res.data.email
@@ -70,12 +68,12 @@ export default {
                 }
             }
         },
-        async decodeFollowers(x){
-            for(let id of x){
-                const res = await axios.get(`/api/user/${id}`)
-                // console.log(res.data.name)
-            }
-        },
+        // async decodeFollowers(x){
+        //     for(let id of x){
+        //         const res = await axios.get(`/api/user/${id}`)
+        //         console.log(`${res.data.name} - ${res.data._id} - ${res.data.image[0].url}`)
+        //     }
+        // },
     }
 }
 

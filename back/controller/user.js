@@ -1,5 +1,5 @@
 import User from "../model/user.js";
-import mongoose from "mongoose";
+
 import { generateToken } from "../config/sessionConfig.js";
 
 // Signup/Register user
@@ -15,6 +15,8 @@ const signupUser = async(req,res) => {
             return res.status(400).json({message: 'Password doesnt match. Try again.'})
         }else if(emailExist || usernameExist){
             return res.status(400).send({message: 'Email or username registered already, try a new one.'})
+        } else if(!name || !username || !password || !email || !confirmPassword) {
+            return res.status(400).send({message: 'Please fill out all fields.'})
         }
     
         const newUser = await User.create({

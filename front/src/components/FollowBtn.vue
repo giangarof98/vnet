@@ -1,5 +1,8 @@
 <template>
-    <p>followers: {{user.followers.length}}</p>
+    <div class="flex flex-row gap-4">
+        <p @click="decodeFollowers">Followers: {{user.followers.length}}</p>
+        <p>Following: {{user.following.length}}</p>
+    </div>
     <button v-show="user.userId !== this.$route.params.id" class="bg-lime-500 w-20 p-1 rounded-xl" @click="followUser">{{displayMsg}}</button>
 </template>
 
@@ -11,7 +14,8 @@ export default {
         return{
             user:{
                 userId:'',
-                followers:[],
+                followers:'',
+                following:'',
             },
         }
     },
@@ -27,14 +31,21 @@ export default {
             const res = await axios.get(`/api/user/${userIdProfile}`)
             
             this.user.followers = res.data.followers
-           
+            this.user.following = res.data.following
+              
         },
         async followUser(){
             const id = this.$route.params.id
             const res = await axios.post(`/api/user/follow/${id}`)
             this.fetchData()
 
-        }
+        },
+        async decodeFollowers(){
+            for(let id of this.user.followers){
+                const res = await axios.get(`/api/user/${id}`)
+                console.log(`${res.data.name} - ${res.data._id} - ${res.data.image[0].url}`)
+            }
+        },
     },
     computed: {
         displayMsg() {

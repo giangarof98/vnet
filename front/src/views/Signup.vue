@@ -73,6 +73,7 @@ export default {
         }
     },
     methods: {
+        
         async fetchData(){
             try {
                 const credentials = {
@@ -84,13 +85,15 @@ export default {
                     }
                     
                 const res = await axios.post('/api/user/signup', credentials)
-                // console.log(res);
-                // this.$router.push(`/signin`)
+                console.log(res.data.message);
+                this.$router.push(`/signin`)
                 
             } catch (error) {
+                console.log(error)
                 if(error.response.data.message){
                     this.message = error.response.data.message
                 }
+                
             }
         }
     }

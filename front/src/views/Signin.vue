@@ -36,7 +36,7 @@ export default {
                 username:'',
                 password:''
             },
-            message:''
+            message:'',
         }
     },
     methods: {
@@ -56,10 +56,14 @@ export default {
             } catch (error) {
                 if(error.response.data.message){
                     this.message = error.response.data.message
-                }
+                } 
             }
         },
         
-    }
+    },
+    created() {
+    // Fetch the message from route params when the component is created
+    this.message = this.$route.params.message || '';
+  }
 }
 </script>
