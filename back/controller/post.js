@@ -84,10 +84,33 @@ const deletePost = async(req,res) => {
     }
 }
 
+//Like post
+const likePost = async(req,res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        const liked = post.likes.some((like) => {
+            return like.equals(req.user._id)
+        })
+        
+        if (liked) {
+            post.likes.pull(req.user._id);
+        } else {
+            post.likes.push(req.user._id);
+        }
+        await post.save();
+        return res.status(200).json({ message: liked ? 'Like removed' : 'Like added' });
+        
+    } catch (error) {
+        res.status(404).json({ message: 'error detected, try again later' });
+    }
+
+}
+
 export {
     getAllPost,
     createPost,
     findPost,
     updatePost,
-    deletePost
+    deletePost, 
+    likePost
 }
