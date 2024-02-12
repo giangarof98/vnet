@@ -23,7 +23,7 @@ const signupUser = async(req,res) => {
             name, username, email, password
         })
         
-        console.log(newUser)
+        // console.log(newUser)
         return res.status(200).json({userProfile: newUser, message: 'User created'})
         
     } catch (error) {
@@ -58,7 +58,7 @@ const signinUser = async(req,res) => {
 // Get
 const getAllUsers = async(req,res) => {
     const users = await User.find({})
-    console.log(users)
+    // console.log(users)
     res.status(200).json(users)
 }
 

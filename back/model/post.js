@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import User from './user.js'
+import { Schema } from "mongoose";
 
 const postSchema = new mongoose.Schema({
     author: {

@@ -7,13 +7,13 @@ cloudinary.config({
     api_key: '757512262653573',
     api_secret: 'nXv3l6yhPd_pozurhbBbVAJWZ9I'
 });
-// const storage1 = new CloudinaryStorage({
-//     cloudinary,
-//     params: {
-//         folder: 'Vnet',
-//         allowedFormats: ['png', 'jpeg', 'jpg']
-//     }
-// });
+const storagePost = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'Vnet',
+        allowedFormats: ['png', 'jpeg', 'jpg']
+    }
+});
 
 const storage = new CloudinaryStorage({
     cloudinary,
@@ -23,4 +23,4 @@ const storage = new CloudinaryStorage({
     }
 });
 
-export {storage, cloudinary}
+export {storage, storagePost, cloudinary}
