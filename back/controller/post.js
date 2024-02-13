@@ -15,7 +15,7 @@ const createPost = async(req,res) => {
         post.author = req.user._id
         await post.save();
         res.status(200).json(req.body);
-        // console.log(post)
+        console.log(post)
     } catch (error) {
         res.status(400).json({error, error: 'Please fill out all fields'})
     }
@@ -52,6 +52,7 @@ const updatePost = async(req,res) => {
                 post.title = title;
                 post.description = description;
                 const savedPost = await post.save()
+                console.log(savedPost)
                 res.status(200).json({savedPost, message: 'Post updated successfuly'})
             }
         

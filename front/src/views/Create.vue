@@ -3,6 +3,10 @@
 
     <h1>Add post</h1>
     <h2>Form</h2>
+
+    <form>
+        
+    </form>
     
 </div>
 </template>

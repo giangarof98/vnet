@@ -4,7 +4,7 @@ import {storage, storagePost} from './cloudinary.js';
 const profile = multer({storage:storage});
 const multerProfile = profile.array("image");
 
-const uploadPost = multer({storagePost:storagePost});
+const uploadPost = multer({storage:storagePost});
 const multerPost = uploadPost.array("image");
 
 export {multerProfile, multerPost}

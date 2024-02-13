@@ -25,8 +25,7 @@ const postSchema = new mongoose.Schema({
             ref: 'User'
         }
     ],
-    
-    image: [{url:String,filename:String,originalname:String}],
+    image: [{url:String,filename:String}],
     
 }, {timestamps:true})
 
