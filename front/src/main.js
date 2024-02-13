@@ -4,9 +4,9 @@ import App from './App.vue'
 import router from './router/router'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faRightFromBracket, faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faRightFromBracket, faPlus, faArrowLeft, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faHome, faRightFromBracket, faPlus, faArrowLeft);
+library.add(faHome, faRightFromBracket, faPlus, faArrowLeft, faHeart);
 
 const app = createApp(App)
 

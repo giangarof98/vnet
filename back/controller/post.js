@@ -3,7 +3,7 @@ import User from "../model/user.js";
 
 // Get All Posts
 const getAllPost = async(req,res) => {
-    const post = await Post.find({})
+    const post = await Post.find({}).populate('author')
     res.status(200).json(post)
 }
 

@@ -1,30 +1,39 @@
 <template>
-<div>
-
-    <h1>Home</h1>
-    <h2>all posts</h2>
-    <h3>render all posts only is the user is following</h3>
-
-    <div v-for="p in post" :key="p._id">
-        <p>{{p.title}}</p>
-        <p>{{p.description}}</p>
-        <img :src="`${p.image[0].url}`" alt="image">
+    <div class="flex flex-col items-center gap-4 m-4">
+        <div 
+            v-for="p in post" 
+            :key="p._id"
+            class="w-2/4 bg-slate-200 p-2" 
+            >
+            <img 
+                :src="`${p.image[0].url}`" 
+                alt="image"
+                class="w-full cursor-pointer"
+                @click="goToPost(p._id)"
+                > 
+            <div class="flex flex-row justify-between p-2">
+                <div>
+                    {{p.author.name}}
+                </div>
+                <div class="flex gap-4">
+                    <LikePost :id="p._id"/>
+                    {{p.likes.length}}
+                </div>
+            </div> 
+        </div>
     </div>
-</div>
 </template>
 
 <script>
 import axios from 'axios';
+import LikePost from '../components/LikePost.vue'
 
 export default {
     name:'Home',
+    components:{LikePost},
     data(){
         return{
-            post:{
-                // _id:'',
-                // title:'',
-
-            }
+            post:{}
         }
     },
     mounted(){
@@ -33,11 +42,16 @@ export default {
     methods:{
         async fetchData(){
             const res = await axios.get(`/api/post`)
-            // this.post._id = res.data._id
-            // this.post.title = res.data.data.title
             console.log(res.data)
             this.post = res.data
+            // this.post.image = res.data
+            // this.post.name = res.data.author.name
+            // this.post.like = res.data.likes
+        },
+        async goToPost(id){
+            this.$router.push(`/post/${id}`);
         }
     }
+
 }
 </script>
