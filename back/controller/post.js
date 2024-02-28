@@ -66,7 +66,8 @@ const findPost = async(req,res) => {
     try{
         const {id} = req.params;
         const post = await Post.findById(id).populate('author')
-        res.send(post)
+        // res.send(post)
+        res.status(200).json(post)
     } catch(e){
         res.send(e.message)
     }

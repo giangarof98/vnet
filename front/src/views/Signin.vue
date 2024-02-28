@@ -51,6 +51,7 @@ export default {
                 const id = res.data.userProfile._id
                 localStorage.setItem("userId", id)
                 this.$router.push(`/profile/${id}`)
+                // this.$router.go(0)
                 // console.log(res.data.userProfile);
                 
             } catch (error) {
